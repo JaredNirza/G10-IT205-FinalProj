@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm mt-4" style="max-width: 600px; margin: auto;">
+    <div class="card-header bg-white">
+        <h2 class="mb-0">Request Details</h2>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item"><strong>Employee:</strong> {{ supply_request.employee }}</li>
+            <li class="list-group-item"><strong>Item Needed:</strong> {{ supply_request.item }}</li>
+            <li class="list-group-item"><strong>Quantity:</strong> {{ supply_request.quantity_requested }}</li>
+            <li class="list-group-item"><strong>Status:</strong> {{ supply_request.status }}</li>
+        </ul>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'request-list' %}" class="btn btn-secondary">Back to Requests</a>
+            <div>
+                <a href="{% url 'request-update' supply_request.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'request-delete' supply_request.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

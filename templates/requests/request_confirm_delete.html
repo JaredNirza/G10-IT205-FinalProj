@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm border-danger mt-4" style="max-width: 500px; margin: auto;">
+    <div class="card-header bg-danger text-white">
+        <h3 class="mb-0">Confirm Deletion</h3>
+    </div>
+    <div class="card-body text-center">
+        <p class="lead">Are you sure you want to delete this request for <strong>{{ supply_request.item }}</strong> made by <strong>{{ supply_request.employee }}</strong>?</p>
+        
+        <form method="POST" class="mt-4">
+            {% csrf_token %}
+            <a href="{% url 'request-list' %}" class="btn btn-secondary me-2">Cancel</a>
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

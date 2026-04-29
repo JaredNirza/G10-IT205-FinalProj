@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm mt-4" style="max-width: 600px; margin: auto;">
+    <div class="card-header bg-white">
+        <h2 class="mb-0">{{ item.name }} Details</h2>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item"><strong>Category:</strong> {{ item.category }}</li>
+            <li class="list-group-item"><strong>Quantity in Stock:</strong> {{ item.quantity_in_stock }}</li>
+            <li class="list-group-item"><strong>Storage Aisle:</strong> {{ item.storage_aisle }}</li>
+            <li class="list-group-item"><strong>Cost per Unit:</strong> ${{ item.cost_per_unit }}</li>
+        </ul>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'item-list' %}" class="btn btn-secondary">Back to List</a>
+            <div>
+                <a href="{% url 'item-update' item.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'item-delete' item.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

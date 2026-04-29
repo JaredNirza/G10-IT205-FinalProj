@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm mt-4">
+    <div class="container-fluid py-5 text-center">
+        <h1 class="display-5 fw-bold">Office Management System</h1>
+        <p class="fs-4 text-muted">Welcome back! Here is a quick look at your office status.</p>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title text-primary">{{ item_count }}</h3>
+                <p class="card-text text-muted">Items in Inventory</p>
+                <a href="{% url 'item-list' %}" class="btn btn-outline-primary">Manage Inventory</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title text-success">{{ employee_count }}</h3>
+                <p class="card-text text-muted">Total Employees</p>
+                <a href="{% url 'employee-list' %}" class="btn btn-outline-success">View Directory</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title text-warning">{{ request_count }}</h3>
+                <p class="card-text text-muted">Pending Requests</p>
+                <a href="{% url 'request-list' %}" class="btn btn-outline-warning">Process Requests</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
