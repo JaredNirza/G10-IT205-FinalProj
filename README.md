@@ -80,19 +80,19 @@ SupplySync Office Manager is a Django web application for tracking office invent
 3. **Run Project**
 
    ```bash
-   uv manage.py runserver
+   uv run manage.py runserver
    ```
 
 4. **Run Migrations**
 
    ```bash
-   uv manage.py migrate
+   uv run manage.py migrate
    ```
 
 5. **Create a superuser account**
 
    ```bash
-   uv manage.py createsuperuser
+   uv run manage.py createsuperuser
    ```
 
 ---
@@ -159,7 +159,7 @@ SupplySync Office Manager is a Django web application for tracking office invent
 2. Run the development server:
 
    ```bash
-   uv manage.py runserver
+   uv run manage.py runserver
    # or
    python manage.py runserver
    ```
@@ -224,7 +224,7 @@ Key settings live in `office_manager/settings.py`.
 
 Admin access:
 
-1. Create a superuser (`uv manage.py createsuperuser`)
+1. Create a superuser (`uv run manage.py createsuperuser`)
 2. Visit `http://127.0.0.1:8000/admin/`
 
 ---
