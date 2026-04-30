@@ -4,18 +4,21 @@
 <div class="card shadow-sm mt-4">
     <div class="card-header bg-white d-flex justify-content-between align-items-center">
         <h2 class="mb-0">Staff Directory</h2>
+        {% if user.is_superuser %}
         <a href="{% url 'employee-create' %}" class="btn btn-success">+ Add Employee</a>
+        {% endif %}
     </div>
-    
+
     <div class="card-body">
         <form method="GET" action="{% url 'employee-list' %}" class="row g-2 mb-4">
             <div class="col-md-10">
-                <input type="text" name="q" class="form-control" placeholder="Search by name, department, or email..." value="{{ request.GET.q }}">
+                <input type="text" name="q" class="form-control" placeholder="Search by name, department, or email..."
+                    value="{{ request.GET.q }}">
             </div>
             <div class="col-md-2 d-flex gap-1">
                 <button class="btn btn-primary w-100" type="submit">Search</button>
                 {% if request.GET.q %}
-                    <a href="{% url 'employee-list' %}" class="btn btn-outline-secondary">Reset</a>
+                <a href="{% url 'employee-list' %}" class="btn btn-outline-secondary">Reset</a>
                 {% endif %}
             </div>
         </form>
@@ -27,19 +30,27 @@
                     <th>Department</th>
                     <th>Email</th>
                     <th>Desk Number</th>
+                    {% if user.is_superuser %}
                     <th>Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
                 {% for employee in employees %}
                 <tr>
-                    <td><strong><a href="{% url 'employee-detail' employee.pk %}" class="text-decoration-none">{{ employee.first_name }} {{ employee.last_name }}</a></strong></td>
+                    <td><strong><a href="{% url 'employee-detail' employee.pk %}" class="text-decoration-none">
+                                {{ employee.first_name }} {{ employee.last_name }}
+                            </a></strong></td>
                     <td>{{ employee.department }}</td>
                     <td>{{ employee.email }}</td>
                     <td>{{ employee.desk_number }}</td>
                     <td>
-                        <a href="{% url 'employee-update' employee.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <a href="{% url 'employee-delete' employee.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'employee-update' employee.pk %}"
+                            class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'employee-delete' employee.pk %}"
+                            class="btn btn-sm btn-outline-danger">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% empty %}

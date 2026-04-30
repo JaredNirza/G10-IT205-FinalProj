@@ -7,7 +7,7 @@
         <a href="{% url 'request-create' %}" class="btn btn-primary">New Request</a>
     </div>
     <div class="card-body">
-        
+
         <div class="mb-3">
             <strong>Filter: </strong>
             <a href="{% url 'request-list' %}" class="btn btn-sm btn-outline-secondary">All</a>
@@ -24,7 +24,9 @@
                     <th>Item Requested</th>
                     <th>Qty</th>
                     <th>Status</th>
+                    {% if user.is_superuser %}
                     <th>Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -35,13 +37,16 @@
                     <td>{{ req.item.name }}</td>
                     <td>{{ req.quantity_requested }}</td>
                     <td>
-                        <span class="badge {% if req.status == 'Pending' %}bg-warning text-dark{% elif req.status == 'Approved' %}bg-success{% else %}bg-info{% endif %}">
+                        <span
+                            class="badge {% if req.status == 'Pending' %}bg-warning text-dark{% elif req.status == 'Approved' %}bg-success{% else %}bg-info{% endif %}">
                             {{ req.status }}
                         </span>
                     </td>
                     <td>
+                        {% if user.is_superuser %}
                         <a href="{% url 'request-update' req.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
                         <a href="{% url 'request-delete' req.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% empty %}

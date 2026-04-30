@@ -7,11 +7,12 @@
         <a href="{% url 'item-add' %}" class="btn btn-primary">Add Item</a>
     </div>
     <div class="card-body">
-        
+
         <form method="GET" class="d-flex mb-3">
-    <input name="q" class="form-control me-2" type="search" placeholder="Search items..." value="{{ request.GET.q }}">
-    <button class="btn btn-outline-primary" type="submit">Search</button>
-</form>
+            <input name="q" class="form-control me-2" type="search" placeholder="Search items..."
+                value="{{ request.GET.q }}">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
 
         <table class="table table-hover align-middle">
             <thead class="table-light">
@@ -20,19 +21,25 @@
                     <th>Category</th>
                     <th>In Stock</th>
                     <th>Cost/Unit</th>
+                    {% if user.is_superuser %}
                     <th>Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
                 {% for item in items %}
                 <tr>
-                    <td><strong><a href="{% url 'item-detail' item.pk %}" class="text-decoration-none">{{ item.name }}</a></strong></td>
+                    <td><strong><a href="{% url 'item-detail' item.pk %}" class="text-decoration-none">
+                                {{ item.name }}
+                            </a></strong></td>
                     <td>{{ item.category }}</td>
                     <td>{{ item.quantity_in_stock }}</td>
                     <td>${{ item.cost_per_unit }}</td>
                     <td>
+                        {% if user.is_superuser %}
                         <a href="{% url 'item-update' item.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
                         <a href="{% url 'item-delete' item.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% empty %}
